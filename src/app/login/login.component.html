@@ -1,0 +1,26 @@
+<div class="login">
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="col-12 col-xl-6 offset-xl-3">
+                    <div class="pb-4" *ngIf="message">
+                        <div class=" alert alert-danger">{{message}}</div>
+                    </div>
+                    <form class="login-form" [formGroup]="loginForm" (submit)="login()">
+                        <div class="login-form-row form-group">
+                            <input type="text" class="login-form-input form-control" placeholder="username" formControlName="username">
+                        </div>
+                        <br>
+                        <div class="login-form-row form-group">
+                            <input type="password" class="login-form-input form-control" placeholder="password" formControlName="password">
+                        </div>
+                        <br>
+                        <br>
+                        <button type="submit" mat-raised-button class="login-form-btn" color="primary">Login</button>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>

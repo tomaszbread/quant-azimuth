@@ -1,0 +1,24 @@
+<app-login *ngIf="!auth.isAuthenticated"></app-login>
+<mat-drawer-container class="wrapper-container" *ngIf="auth.isAuthenticated">
+    <mat-drawer mode="side" class="side-container" opened fixedInViewport="true">
+        <div class="side-content">
+            <div class="logo">
+                <span>Q</span>
+            </div>
+            <div class="menu">
+                <button mat-icon-button routerLink="/home">
+                    <mat-icon [style.color]="'white'">roofing</mat-icon>
+                </button>
+                <button mat-icon-button routerLink="/charts">
+                    <mat-icon [style.color]="'white'">stacked_bar_chart</mat-icon>
+                </button>
+                <button mat-icon-button (click)="logout()">
+                    <mat-icon [style.color]="'white'">exit_to_app</mat-icon>
+                </button>
+            </div>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

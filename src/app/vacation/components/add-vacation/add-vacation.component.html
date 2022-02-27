@@ -1,0 +1,110 @@
+<h6 mat-dialog-title>ADD VACATION</h6>
+<div class="vavcation-modal-hight">
+    <form [formGroup]="addVacationForm" (ngSubmit)="addVacation()" autocomplete="off">
+        <div mat-dialog-content>
+            <div class="mb-1 row">
+                <label for="vacationType" class="col-sm-5 col-form-label">Vacation Type</label>
+                <div class="col-sm-7">
+                    <select class="form-control" id="vacationType" formControlName="vacationType" (change)="changeType()" name="vacationType">
+                        <option [ngValue]="null" disabled>Please Select Vacation Type</option>
+                        <option *ngFor="let item of vacationTypeList" [ngValue]="item" [label]="vacationType[item]"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-1 row" *ngIf="getVacationType() === vacationType.Unpaid">
+                <label for="vacationRange" class="col-sm-5 col-form-label">Choose Vacation Range</label>
+                <div class="col-sm-7">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button type="button" mat-flat-button color="primary" class="input-group-button" (click)="dateOfVacationPicker.open()">
+                                <mat-icon>date_range</mat-icon>
+                            </button>
+                        </div>
+                        <mat-date-range-input class="form-control" [rangePicker]="dateOfVacationPicker">
+                            <input matStartDate placeholder="Start date" (dateChange)="calculateDuration()" formControlName="vacationStartDate">
+                            <input matEndDate placeholder="End date" (dateChange)="calculateDuration()" formControlName="vacationEndDate">
+                        </mat-date-range-input>
+                        <mat-date-range-picker #dateOfVacationPicker></mat-date-range-picker>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-1 row" *ngIf="vacationType.Annual  === getVacationType() || vacationType.Sick  ===  getVacationType()">
+                <label for="vacationRange" class="col-sm-5 col-form-label">Choose Vacation Range</label>
+                <div class="col-sm-7">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button type="button" mat-flat-button color="primary" class="input-group-button" (click)="dateOfVacationPicker.open()">
+                                <mat-icon>date_range</mat-icon>
+                            </button>
+                        </div>
+                        <mat-date-range-input class="form-control" [rangePicker]="dateOfVacationPicker">
+                            <input matStartDate placeholder="Start date" (dateChange)="calculateDuration()" formControlName="vacationStartDate">
+                            <input matEndDate placeholder="End date" (dateChange)="calculateDuration()" formControlName="vacationEndDate">
+                        </mat-date-range-input>
+                        <mat-date-range-picker #dateOfVacationPicker [maxRange]="calculateMaxRange()"></mat-date-range-picker>
+                    </div>
+                </div>
+
+            </div>
+            <div class="mb-1 row" *ngIf="vacationType.Paternal === getVacationType() || vacationType.Maternity ===  getVacationType() ">
+                <label for="vacationRange" class="col-sm-5 col-form-label">Choose Vacation Range</label>
+                <div class="col-sm-7">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button type="button" mat-flat-button color="primary" class="input-group-button" (click)="dateOfVacationPicker.open()">
+                                <mat-icon>date_range</mat-icon>
+                            </button>
+                        </div>
+                        <mat-date-range-input class="form-control" [rangePicker]="dateOfVacationPicker">
+                            <input matStartDate placeholder="Start date" (dateChange)="calculateDuration()" formControlName="vacationStartDate">
+                            <input matEndDate placeholder="End date" (dateChange)="calculateDuration()" formControlName="vacationEndDate">
+                        </mat-date-range-input>
+                        <mat-date-range-picker #dateOfVacationPicker [specificDays]="getVacationType()"></mat-date-range-picker>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="mb-1 row" formGroupName="totalDuration">
+                <label for="vacationRange" class="col-sm-5 col-form-label">Total Duration
+                </label>
+                <div class="col-sm-7">
+                    <label class="col-form-label">
+                        <b>DAYS :</b> <span class="px-3">{{ addVacationForm['controls'].totalDuration['controls'].days.value}}</span>
+                        <b>HOURS :</b> <span class="px-3">{{ addVacationForm['controls'].totalDuration['controls'].hours.value}} </span>
+                    </label>
+                </div>
+            </div>
+            <div class="mb-1 row" formGroupName="requestingDate">
+                <label for="vacationRange" class="col-sm-5 col-form-label">Request Date
+                </label>
+                <div class="col-sm-7">
+                    <label class="col-form-label">
+                        <span>{{ addVacationForm['controls'].requestingDate.value |date: 'dd/MM/yyyy'}}</span>
+                    </label>
+
+                </div>
+            </div>
+            <div class="mb-1 row">
+                <label for="remainingAnnualVacationDays" class="col-sm-5 col-form-label">Remaining Annual Vacation Days
+                </label>
+                <div class="col-sm-7">
+                    <label class="col-form-label">
+                        <span>{{(remainingAnnualVacationDays ) }}</span>
+                    </label>
+
+                </div>
+            </div>
+            <br>
+        </div>
+        <div mat-dialog-actions>
+            <button type="submit" mat-raised-button color="primary">Add</button>
+        </div>
+    </form>
+    <br>
+    <br>
+    <app-vacations-list [vacationsList]="vacationsList" [vacationsList$]="vacationsList$" (remainingAnnualVacationDaysChange)="getRemainingAnnualVacationDays()"></app-vacations-list>
+    <br>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close]="false" color="warn">Close</button>
+</div>

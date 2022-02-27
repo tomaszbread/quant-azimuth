@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&display=swap');
+
+mat-sidenav {
+    width: 200px;
+    background-color: #646b93;
+  }
+  mat-drawer-container {   height: 100vh; }
+  .wrapper-container{
+    background-color: white;
+  }
+  .side-container{
+    background-color: #646b93;
+    width: 100px;
+    }
+    .side-content{
+        display: flex;
+        flex-direction: column;
+        height: 95vh;
+        align-items: center;
+        .menu{
+            display: flex;
+            flex-direction: column;
+            height: 20%;
+            justify-content: space-around;
+         }
+    }
+  .logo{
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      span{
+        font-family: "Shippori Antique B1", sans-serif;
+        font-size: 50px;
+        color: #ffffff;
+      }
+
+ 
+  }

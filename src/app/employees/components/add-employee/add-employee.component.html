@@ -1,0 +1,118 @@
+<h6 mat-dialog-title>ADD EMPLOYEE</h6>
+<form [formGroup]="addEmployeeForm" (ngSubmit)="addEmployee()" autocomplete="off">
+    <div mat-dialog-content>
+        <br>
+
+        <div class="mb-1 row">
+            <label for="employeeCode" class="col-sm-5 col-form-label">Employee code</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button type="button" mat-flat-button color="primary" class="input-group-button" (click)="generateAlphanumericCode()">Generate</button>
+                    </div>
+                    <input type="text" class="form-control" id="employeeCode" formControlName="employeeCode" name="employeeCode" autocomplete="new-employeeCode">
+                </div>
+            </div>
+
+        </div>
+        <div class="mb-1 row">
+            <label for="firstName" class="col-sm-5 col-form-label">First name</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" id="firstName" formControlName="firstName" name="employee_firstName" autocomplete="off">
+            </div>
+        </div>
+        <div class="mb-1 row">
+            <label for="lastName" class="col-sm-5 col-form-label">Last Name</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" id="lastName" formControlName="lastName" name="employee_lastName" autocomplete="off">
+            </div>
+        </div>
+        <div class="mb-1 row">
+            <label for="dateOfEmployment" class="col-sm-5 col-form-label">Joining date in the company
+            </label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button type="button" mat-flat-button color="primary" class="input-group-button" (click)="dateOfEmploymentPicker.open()">
+                            <mat-icon>date_range</mat-icon>
+                        </button>
+                    </div>
+                    <input type="text" class="form-control" id="dateOfEmployment" formControlName="dateOfEmployment" name="employee_dateOfEmployment" [matDatepicker]="dateOfEmploymentPicker" placeholder="Choose a date" autocomplete="off">
+
+                    <mat-datepicker #dateOfEmploymentPicker></mat-datepicker>
+                </div>
+            </div>
+        </div>
+        <div class="mb-1 row">
+            <label for="birthDate" class="col-sm-5 col-form-label">Date of birth</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button type="button" mat-flat-button color="primary" class="input-group-button" (click)="birthDatePicker.open()">
+                            <mat-icon>date_range</mat-icon>
+                        </button>
+                    </div>
+                    <input type="text" class="form-control" id="birthDate" formControlName="birthDate" name="employee_birthDate" [matDatepicker]="birthDatePicker" placeholder="Choose a date" autocomplete="off">
+
+                    <mat-datepicker #birthDatePicker></mat-datepicker>
+                </div>
+            </div>
+        </div>
+        <div class="mb-1 row">
+            <label for="gender" class="col-sm-5 col-form-label">Gender</label>
+            <div class="col-sm-7">
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width: 100%;">
+                    <input type="radio" class="btn-check" name="gender" id="Female" [value]="gender.female" formControlName="gender" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="Female">Female</label>
+
+                    <input type="radio" class="btn-check" name="gender" id="Male" [value]="gender.male" formControlName="gender" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="Male">Male</label>
+                </div>
+            </div>
+        </div>
+        <div class="mb-1 row">
+            <label for="martialStatus" class="col-sm-5 col-form-label">Martial Status</label>
+            <div class="col-sm-7">
+                <select class="form-control" id="martialStatus" formControlName="martialStatus" name="employee_martialStatus">
+                    <option [ngValue]="null" disabled>Please Select Martial Status</option>
+                    <option *ngFor="let item of martialStatusList" [ngValue]="item" [label]="martialStatus[item]"></option>
+                </select>
+            </div>
+        </div>
+        <div class="mb-1 row">
+            <label for="role" class="col-sm-5 col-form-label">Role</label>
+            <div class="col-sm-7">
+                <select class="form-control" id="role" formControlName="role" name="employee_role" autocomplete="off">
+                    <option [ngValue]="null" disabled>Please Select Role</option>
+                    <option *ngFor="let item of roleList" [ngValue]="item" [label]="role[item]"></option>
+                </select>
+
+            </div>
+        </div>
+        <div class="mb-1 row">
+            <label for="mobileNumber" class="col-sm-5 col-form-label">Mobile Number</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" id="mobileNumber" formControlName="mobileNumber" name="employee_mobileNumber" autocomplete="off">
+            </div>
+        </div>
+        <div class="mb-1 row">
+            <label for="status" class="col-sm-5 col-form-label">Status</label>
+            <div class="col-sm-7">
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width: 100%;">
+                    <input type="radio" class="btn-check" name="status" id="Acitve" [value]="status.active" formControlName="status" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="Acitve">Acitve</label>
+
+                    <input type="radio" class="btn-check" name="status" id="Inactive" [value]="status.inactive" formControlName="status" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="Inactive">Inactive</label>
+                </div>
+            </div>
+        </div>
+        <br>
+
+    </div>
+    <div mat-dialog-actions>
+        <button type="submit" *ngIf="!employeeDto" mat-raised-button color="primary">Add</button>
+        <button type="button" *ngIf="employeeDto" (click)="updateEmployee()" mat-raised-button color="primary">Update</button>
+        <button mat-raised-button [mat-dialog-close]="false" color="warn">Close</button>
+    </div>
+</form>

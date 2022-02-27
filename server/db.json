@@ -1,0 +1,31 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin!001",
+      "roles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "id": 2,
+      "username": "terry",
+      "password": "terry!001",
+      "roles": [
+        "ADMIN",
+        "USER"
+      ]
+    },
+    {
+      "id": 3,
+      "username": "tomek",
+      "password": "tomek!001",
+      "roles": [
+        "USER"
+      ]
+    }
+  ],
+  "employees": [],
+  "vacations": []
+}
