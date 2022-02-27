@@ -11,9 +11,9 @@ To run this project, clone repository
 git clone https://github.com/tomaszbread/quant-azimuth.git
 ```
 
-1.npm install in server folder 
+Npm install in server folder 
 
-2.npm install in root project folder 
+Npm install in root project folder 
 
 To run server:
 
@@ -27,7 +27,7 @@ To run project:
 npm run start
 ```
 
-credentials 
+Credentials 
   
 ```
 
