@@ -34,9 +34,6 @@ export class ChartsComponent implements OnInit {
       this.context = this.myCanvas.nativeElement.getContext('2d');
       this.createCharts();
     });
-
-
-
   }
 
   createCharts() {
