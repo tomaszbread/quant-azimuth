@@ -33,7 +33,6 @@ export class AddEmployeeComponent implements OnInit {
   ) {
   }
 
-
   ngOnInit(): void {
     this.createForm();
     this.setEmployeeData();
@@ -65,9 +64,9 @@ export class AddEmployeeComponent implements OnInit {
     });
   }
 
-
   addEmployee() {
     if (this.addEmployeeForm.invalid) {
+      this.checkSumbmitValidity();
       return;
     }
     this.employeeService.addEmployee(this.addEmployeeForm.value).subscribe(res => this.dialogRef.close(res));
@@ -81,5 +80,22 @@ export class AddEmployeeComponent implements OnInit {
     this.addEmployeeForm.controls.employeeCode.setValue(Math.random().toString(36).slice(2));
   }
 
-}
+  checkSumbmitValidity() {
+    for (const field in this.addEmployeeForm.controls) {
+      this.addEmployeeForm.get(field).markAsDirty({ onlySelf: true });
+      this.addEmployeeForm.get(field).markAsTouched({ onlySelf: true });
+      this.displayFieldCss(field);
+    }
+  }
 
+  displayFieldCss(field: string) {
+    return {
+      'has-error': this.isFieldValid(this.addEmployeeForm,field)
+    };
+  }
+
+  isFieldValid(form: FormGroup, field: string) {
+    return !form.get(field).valid && form.get(field).dirty;
+  }
+
+}
